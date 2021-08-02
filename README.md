@@ -14,9 +14,9 @@ In order for the project to work, two Python files require your attention: apiKe
 
 ### Using Virtualenv to create an environment dedicated to the project.
 
-1. Create an enviroment
+1. Create an environment
 ```
-python -m venv enviroment_name
+python -m venv environment_name
 ```
 2. Activate the environment
 ```
