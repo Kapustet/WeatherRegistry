@@ -18,11 +18,11 @@ In order for the project to work, two Python files require your attention: apiKe
 ```
 python -m venv enviroment_name
 ```
-1. Activate the environment
+2. Activate the environment
 ```
 environment_name\Scripts\activate.bat
 ```
-1. Download the required dependencies
+3. Download the required dependencies
 ```
 pip install -r requirements.txt
 ```
