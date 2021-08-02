@@ -15,12 +15,17 @@ In order for the project to work, two Python files require your attention: apiKe
 ### Using Virtualenv to create an environment dedicated to the project.
 
 1. Create an enviroment
+```
 python -m venv enviroment_name
+```
 1. Activate the environment
+```
 environment_name\Scripts\activate.bat
+```
 1. Download the required dependencies
+```
 pip install -r requirements.txt
-
+```
 ## Creating a database
 Refer to DatabaseCreationInstructions.txt.
 
