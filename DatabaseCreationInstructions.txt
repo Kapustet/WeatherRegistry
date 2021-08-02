@@ -1,0 +1,35 @@
+1.
+mysql -u root -p
+
+2.
+create database WeatherRegistryLogsDB;
+
+3.
+create table log( id int auto_increment primary key,
+ts timestamp default current_timestamp,
+city varchar(32) not null,
+description varchar(64) not null,
+currTemp decimal(4,2)not null,
+feelsLike decimal(4,2) not null,
+minTemp decimal(4,2) not null,
+maxTemp decimal(4,2) not null,
+pressure smallint not null,
+humidity tinyint not null,
+windSpeed decimal(4,2) not null );
+
+4.
+describe log;
+
+5.
+create user 'WeatherRegistry'@'localhost' identified by 'weatherregistrypasswd';
+
+6.
+flush privileges;
+
+7.
+grant all privileges on `WeatherRegistryLogsDB`.* to 'WeatherRegistry'@'localhost';
+
+// quit with 'exit' and re-enter with:
+
+8.
+mysql -u WeatherRegistry -p WeatherRegistryLogsDB
