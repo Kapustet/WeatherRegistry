@@ -2,7 +2,7 @@ import datetime
 import time
 import requests
 from apiKey import apiKey
-from dbconfig import dbconfig,_SQL
+from dbconfig import dbconfig,_INSERT_INTO_LOG,_INSERT_INTO_ERROR_LOG
 from DatabaseContextManager import UseDatabase
 
 class DataGatherer:
@@ -34,24 +34,42 @@ def console_log_weather_data():
 
 def db_log_weather_data(DG,WD):
     with UseDatabase(dbconfig) as cursor:
-        cursor.execute(_SQL,(DG.cityName,WD.description,WD.currentTemp,WD.feelsLikeTemp,WD.temp_min,WD.temp_max,WD.pressure,WD.humidity,WD.windSpeed,))
+        cursor.execute(_INSERT_INTO_LOG,(DG.cityName,WD.description,WD.currentTemp,WD.feelsLikeTemp,WD.temp_min,WD.temp_max,WD.pressure,WD.humidity,WD.windSpeed,))
+
+def db_log_error(error):
+    with UseDatabase(dbconfig) as cursor:
+        cursor.execute(_INSERT_INTO_ERROR_LOG,(str(error),))
 
 DG = DataGatherer('Tczew','metric',apiKey)
 
 while True:
-
-    data = DG.gather_data()
-    WD = Weather(data)
+    for i in range(5):
+        try:
+    
+            data = DG.gather_data()
+            WD = Weather(data)
+        except Exception as Argument:
+            print(f'An error occured: {Argument}\n')
+            db_log_error(Argument)
+            time.sleep(6)
+            continue
+        break
     currentTime = datetime.datetime.now()
 
-    if currentTime.minute == 0:
+    for i in range(5):   
+        try:
+            if currentTime.minute == 43:
         
-        data = DG.gather_data()
-        WD = Weather(data)
-
-        db_log_weather_data(DG,WD)
-        console_log_weather_data()
-    else:
-        console_log_weather_data()
-
+                data = DG.gather_data()
+                WD = Weather(data)
+                db_log_weather_data(DG,WD)
+                console_log_weather_data()
+            else:
+                console_log_weather_data()
+        except Exception as Argument:
+            print(f'An error occured: {Argument}')
+            db_log_error(Argument)
+            time.sleep(6)
+            continue
+        break
     time.sleep(60)
