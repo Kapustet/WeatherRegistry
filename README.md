@@ -9,7 +9,7 @@ Making calls to [Open Weather API](https://openweathermap.org) in order to obtai
 	* requirements.txt (included in project files)
 * [MariaDB 10.6](https://mariadb.org/download/)
 
-In order for the project to work, two Python files require your attention: apiKey, dbconfig. Both of them have a base template, it just needs to be filled with your unique api key(obtained [here](https://openweathermap.org/api)) and database configuration accordingly.
+In order for the project to work, two Python files require your attention: api_key, dbconfig. Both of them have a base template, it just needs to be filled with your unique api key(obtained [here](https://openweathermap.org/api)) and database configuration accordingly(example setup shown in database_creation_instructions.txt).
 	
 
 ### Using Virtualenv to create an environment dedicated to the project.
@@ -27,7 +27,7 @@ environment_name\Scripts\activate.bat
 pip install -r requirements.txt
 ```
 ## Creating a database
-Refer to DatabaseCreationInstructions.txt.
+Refer to database_creation_instructions.txt.
 
 
 
